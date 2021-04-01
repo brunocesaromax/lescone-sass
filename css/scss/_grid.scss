@@ -36,3 +36,86 @@ p {
     color: aqua;
   }
 }
+
+// Função do grid
+
+@function grid($col, $offset: false) {
+  $width: $col / $cols * 100 + "%";
+  $result: calc(#{$width} - #{$gutter});
+
+  @if $offset == offset {
+    $gutter: $gutter / 2;
+    $result: calc(#{$width} + #{$gutter});
+  }
+
+  @return $result;
+}
+
+// Gerando as classes de grid
+@for $i from 1 through $cols {
+  .grid-#{$i} {
+    width: grid($i);
+  }
+}
+
+// Mixin estrutura do grid
+@mixin grid-structure {
+  float: left;
+  min-height: 1px;
+  margin-left: $gutter / 2;
+  margin-right: $gutter / 2;
+  @include d(s) {
+    width: 100%; //No mobile é apenas uma coluna
+    float: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+//Seleciona todas as classes que contenham 'grid-'
+[class^="grid-"] {
+  @include grid-structure;
+}
+
+//Gerando as classes de offset
+@for $i from 1 through $cols {
+  .offset-#{$i} {
+    width: grid($i, offset);
+    @extend %offset;
+  }
+}
+
+//Quando for mobile forçar margin zerada
+@include d(s){
+  %offset {
+    margin-left: 0;
+  }
+}
+
+// Mixin de clearfix
+@mixin clearfix {
+  &::after, &::before {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin container {
+  max-width: $l-device;
+  margin: 0 auto;
+  position: relative;
+  @include d(m) {
+    max-width: $m-device;
+  }
+  @include d(s) {
+    max-width: $s-device;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  @include clearfix;
+}
+
+.container {
+  @include container;
+}
