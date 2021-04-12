@@ -27,16 +27,6 @@ $s-device: 480px; //tela pequena
   }
 }
 
-p {
-  color: blue;
-  @include d(m) {
-    color: pink;
-  }
-  @include d(s) {
-    color: aqua;
-  }
-}
-
 // Função do grid
 
 @function grid($col, $offset: false) {
@@ -80,7 +70,7 @@ p {
 //Gerando as classes de offset
 @for $i from 1 through $cols {
   .offset-#{$i} {
-    width: grid($i, offset);
+    margin-left: grid($i, offset);
     @extend %offset;
   }
 }
@@ -133,10 +123,4 @@ p {
 
 .row {
   @include row;
-}
-
-div {
-  background: rgba(0, 0, 0, .4);
-  min-height: 50px !important;
-  margin-bottom: 20px;
 }
