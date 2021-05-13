@@ -10,7 +10,7 @@ $s-device: 480px; //tela pequena
   box-sizing: border-box;
 }
 
-// Mixin de media-querie
+// Mixin de media-query
 @mixin d($size) {
   @if $size == l {
     @media screen and (min-width: #{$l-device}) {
