@@ -1,0 +1,18 @@
+1- Cuidado com os Nestings, tentar manter no máximo 3 nesting
+section {
+    div {
+        ul {
+            li {
+                a {
+                    span {
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+2- Frameworks para se usar com SASS:
+    - Compass: compass-style.org
+    - Bourbon: bourbon.io
