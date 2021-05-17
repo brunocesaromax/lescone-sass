@@ -32,3 +32,10 @@ $font-2: 'Aref Ruqaa', serif;
     line-height: em(30, 24); //Necessário mudar o contexto
   }
 }
+
+// Shadow para diferentes browsers
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
